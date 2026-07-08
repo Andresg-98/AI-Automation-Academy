@@ -1,33 +1,37 @@
+import ProgressCard from "../components/ProgressCard";
+import CourseCard from "../components/CourseCard";
+
 function Dashboard() {
   return (
-    <div
-      style={{
-        flex: 1,
-        padding: "40px",
-      }}
-    >
-      <h1>Bienvenido Andrés 👋</h1>
+    <div className="flex-1 p-10">
+      <h1 className="text-4xl font-bold text-white">
+        Bienvenido Andrés 👋
+      </h1>
 
-      <h2>AI Automation Academy</h2>
+  <div className="mt-8">
+    <ProgressCard />
+</div>
 
-      <br />
+      <p className="text-slate-400 mt-2">
+        Continúa aprendiendo Inteligencia Artificial y Automatización.
+      </p>
 
-      <h3>Nivel 1</h3>
+      <div className="grid md:grid-cols-3 gap-6 mt-10">
+        <CourseCard
+          title="React desde cero"
+          progress="10%"
+        />
 
-      <p>XP: 0 / 100</p>
+        <CourseCard
+          title="JavaScript Moderno"
+          progress="0%"
+        />
 
-      <button
-        style={{
-          padding: "15px 30px",
-          background: "#2563eb",
-          color: "white",
-          border: "none",
-          borderRadius: "10px",
-          cursor: "pointer",
-        }}
-      >
-        Continuar Curso
-      </button>
+        <CourseCard
+          title="Automatización con n8n"
+          progress="0%"
+        />
+      </div>
     </div>
   );
 }
