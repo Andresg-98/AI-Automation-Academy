@@ -5,39 +5,109 @@ import ProgressCard from "../components/ProgressCard";
 
 function Dashboard() {
 
-  const [xp, setXp] = useState(120);
+  const [usuario] = useState({
+
+    nombre: "Andrés",
+
+    nivel: 3,
+
+    xp: 300,
+
+    racha: 4,
+
+    cursos: 3,
+
+    automatizaciones: 0
+
+  });
 
   return (
+
     <div className="flex-1 p-10">
 
       <h1 className="text-4xl font-bold">
-        Bienvenido Andrés 👋
+
+        Bienvenido {usuario.nombre} 👋
+
       </h1>
 
       <p className="text-slate-400 mt-2">
-        Continúa aprendiendo IA y Automatización.
+
+        Sigue aprendiendo IA y Automatización.
+
       </p>
 
-      <div className="mt-6">
+      <div className="grid md:grid-cols-4 gap-5 mt-8">
 
-        <h2 className="text-xl font-semibold">
+        <div className="bg-slate-800 rounded-xl p-5">
 
-          XP Actual: {xp}
+          <h3 className="text-slate-400">
 
-        </h2>
+            Nivel
 
-        <button
-          onClick={() => setXp(xp + 25)}
-          className="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg mt-4 transition-colors"
-        >
-          Completar lección (+25 XP)
-        </button>
+          </h3>
+
+          <p className="text-3xl font-bold">
+
+            {usuario.nivel}
+
+          </p>
+
+        </div>
+
+        <div className="bg-slate-800 rounded-xl p-5">
+
+          <h3 className="text-slate-400">
+
+            XP
+
+          </h3>
+
+          <p className="text-3xl font-bold">
+
+            {usuario.xp}
+
+          </p>
+
+        </div>
+
+        <div className="bg-slate-800 rounded-xl p-5">
+
+          <h3 className="text-slate-400">
+
+            Cursos
+
+          </h3>
+
+          <p className="text-3xl font-bold">
+
+            {usuario.cursos}
+
+          </p>
+
+        </div>
+
+        <div className="bg-slate-800 rounded-xl p-5">
+
+          <h3 className="text-slate-400">
+
+            Racha
+
+          </h3>
+
+          <p className="text-3xl font-bold">
+
+            🔥 {usuario.racha}
+
+          </p>
+
+        </div>
 
       </div>
 
       <div className="mt-8">
 
-        <ProgressCard xp={xp} />
+        <ProgressCard xp={usuario.xp} />
 
       </div>
 
@@ -45,12 +115,12 @@ function Dashboard() {
 
         <CourseCard
           title="React desde cero"
-          progress="10%"
+          progress="40%"
         />
 
         <CourseCard
           title="JavaScript Moderno"
-          progress="0%"
+          progress="15%"
         />
 
         <CourseCard
@@ -61,7 +131,9 @@ function Dashboard() {
       </div>
 
     </div>
+
   );
+
 }
 
 export default Dashboard;
