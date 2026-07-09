@@ -1,26 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
+
+import { UserContext } from "../context/UserContext";
 
 import CourseCard from "../components/CourseCard";
 import ProgressCard from "../components/ProgressCard";
+
 import courses from "../data/courses";
 
 function Dashboard() {
 
-  const [usuario] = useState({
+  const { user } = useContext(UserContext);
 
-    nombre: "Andrés",
+  const xpPorNivel = 300;
 
-    nivel: 3,
-
-    xp: 300,
-
-    racha: 4,
-
-    cursos: courses.length,
-
-    automatizaciones: 0
-
-  });
+  const nivelActual =
+    Math.floor(user.xp / xpPorNivel) + 1;
 
   return (
 
@@ -28,7 +22,7 @@ function Dashboard() {
 
       <h1 className="text-4xl font-bold">
 
-        Bienvenido {usuario.nombre} 👋
+        Bienvenido {user.name} 👋
 
       </h1>
 
@@ -42,48 +36,48 @@ function Dashboard() {
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">Nivel</h3>
+          <h3 className="text-slate-400">
+            Nivel
+          </h3>
 
           <p className="text-3xl font-bold">
-
-            {usuario.nivel}
-
+            {nivelActual}
           </p>
 
         </div>
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">XP</h3>
+          <h3 className="text-slate-400">
+            XP
+          </h3>
 
           <p className="text-3xl font-bold">
-
-            {usuario.xp}
-
+            {user.xp}
           </p>
 
         </div>
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">Cursos</h3>
+          <h3 className="text-slate-400">
+            Cursos
+          </h3>
 
           <p className="text-3xl font-bold">
-
-            {usuario.cursos}
-
+            {courses.length}
           </p>
 
         </div>
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">Racha</h3>
+          <h3 className="text-slate-400">
+            Racha
+          </h3>
 
           <p className="text-3xl font-bold">
-
-            🔥 {usuario.racha}
-
+            🔥 {user.streak}
           </p>
 
         </div>
@@ -92,7 +86,7 @@ function Dashboard() {
 
       <div className="mt-8">
 
-        <ProgressCard xp={usuario.xp} />
+        <ProgressCard xp={user.xp} />
 
       </div>
 
@@ -108,7 +102,7 @@ function Dashboard() {
 
             title={course.title}
 
-            progress="0%"
+            progress={`${user.progress[course.id]}%`}
 
           />
 
