@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import CourseCard from "../components/CourseCard";
 import ProgressCard from "../components/ProgressCard";
+import courses from "../data/courses";
 
 function Dashboard() {
 
@@ -15,7 +16,7 @@ function Dashboard() {
 
     racha: 4,
 
-    cursos: 3,
+    cursos: courses.length,
 
     automatizaciones: 0
 
@@ -41,11 +42,7 @@ function Dashboard() {
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">
-
-            Nivel
-
-          </h3>
+          <h3 className="text-slate-400">Nivel</h3>
 
           <p className="text-3xl font-bold">
 
@@ -57,11 +54,7 @@ function Dashboard() {
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">
-
-            XP
-
-          </h3>
+          <h3 className="text-slate-400">XP</h3>
 
           <p className="text-3xl font-bold">
 
@@ -73,11 +66,7 @@ function Dashboard() {
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">
-
-            Cursos
-
-          </h3>
+          <h3 className="text-slate-400">Cursos</h3>
 
           <p className="text-3xl font-bold">
 
@@ -89,11 +78,7 @@ function Dashboard() {
 
         <div className="bg-slate-800 rounded-xl p-5">
 
-          <h3 className="text-slate-400">
-
-            Racha
-
-          </h3>
+          <h3 className="text-slate-400">Racha</h3>
 
           <p className="text-3xl font-bold">
 
@@ -113,20 +98,21 @@ function Dashboard() {
 
       <div className="grid md:grid-cols-3 gap-6 mt-10">
 
-        <CourseCard
-          title="React desde cero"
-          progress="40%"
-        />
+        {courses.map((course) => (
 
-        <CourseCard
-          title="JavaScript Moderno"
-          progress="15%"
-        />
+          <CourseCard
 
-        <CourseCard
-          title="Automatización con n8n"
-          progress="0%"
-        />
+            key={course.id}
+
+            id={course.id}
+
+            title={course.title}
+
+            progress="0%"
+
+          />
+
+        ))}
 
       </div>
 

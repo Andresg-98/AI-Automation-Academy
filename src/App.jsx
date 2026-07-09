@@ -1,3 +1,4 @@
+import Course from "./pages/Course";
 import { Routes, Route } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
@@ -45,6 +46,11 @@ function App() {
           <Route
             path="/configuracion"
             element={<Configuracion />}
+          />
+
+          <Route 
+            path="/course/:id" 
+            element={<Course />} 
           />
 
         </Routes>

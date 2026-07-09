@@ -1,6 +1,12 @@
-function CourseCard({ title, progress }) {
+import { useNavigate } from "react-router-dom";
+
+function CourseCard({ id, title, progress }) {
+
+  const navigate = useNavigate();
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 hover:border-blue-500 transition-all duration-300">
+
       <h2 className="text-xl font-bold text-white">
         {title}
       </h2>
@@ -16,9 +22,13 @@ function CourseCard({ title, progress }) {
         ></div>
       </div>
 
-      <button className="mt-6 bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg text-white font-medium transition-colors">
+      <button
+        onClick={() => navigate(`/course/${id}`)}
+        className="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg mt-5"
+      >
         Continuar
       </button>
+
     </div>
   );
 }
