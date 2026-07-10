@@ -1,42 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 
+import initialUser from "../data/user";
+
 export const UserContext = createContext();
-
-const initialUser = {
-
-  name: "Andrés",
-
-  xp: 300,
-
-  streak: 4,
-
-  completedCourses: [],
-
-  progress: {
-
-    react: 80,
-
-    javascript: 35,
-
-    n8n: 0,
-
-    python: 0
-
-  },
-
-  currentLesson: {
-
-    react: 0,
-
-    javascript: 0,
-
-    n8n: 0,
-
-    python: 0
-
-  }
-
-};
 
 function UserProvider({ children }) {
 
@@ -45,9 +11,37 @@ function UserProvider({ children }) {
     const savedUser =
       localStorage.getItem("academy-user");
 
-    return savedUser
-      ? JSON.parse(savedUser)
-      : initialUser;
+    if (!savedUser) {
+
+      return initialUser;
+
+    }
+
+    const parsedUser = JSON.parse(savedUser);
+
+    return {
+
+      ...initialUser,
+
+      ...parsedUser,
+
+      progress: {
+
+        ...initialUser.progress,
+
+        ...parsedUser.progress
+
+      },
+
+      currentLesson: {
+
+        ...initialUser.currentLesson,
+
+        ...parsedUser.currentLesson
+
+      }
+
+    };
 
   });
 
