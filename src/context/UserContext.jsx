@@ -22,6 +22,18 @@ const initialUser = {
 
     python: 0
 
+  },
+
+  currentLesson: {
+
+    react: 0,
+
+    javascript: 0,
+
+    n8n: 0,
+
+    python: 0
+
   }
 
 };
@@ -30,9 +42,12 @@ function UserProvider({ children }) {
 
   const [user, setUser] = useState(() => {
 
-    const savedUser = localStorage.getItem("academy-user");
+    const savedUser =
+      localStorage.getItem("academy-user");
 
-    return savedUser ? JSON.parse(savedUser) : initialUser;
+    return savedUser
+      ? JSON.parse(savedUser)
+      : initialUser;
 
   });
 
@@ -48,11 +63,31 @@ function UserProvider({ children }) {
 
   }, [user]);
 
+  function updateCurrentLesson(courseId, lessonIndex) {
+
+    setUser((prev) => ({
+
+      ...prev,
+
+      currentLesson: {
+
+        ...prev.currentLesson,
+
+        [courseId]: lessonIndex
+
+      }
+
+    }));
+
+  }
+
   function completeCourse(courseId) {
 
     setUser((prev) => {
 
-      if (prev.completedCourses.includes(courseId)) {
+      if (
+        prev.completedCourses.includes(courseId)
+      ) {
 
         return prev;
 
@@ -93,6 +128,8 @@ function UserProvider({ children }) {
       value={{
 
         user,
+
+        updateCurrentLesson,
 
         completeCourse
 

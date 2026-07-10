@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import lessons from "../data/lessons";
@@ -12,7 +12,15 @@ function Course() {
 
   const navigate = useNavigate();
 
-  const { completeCourse } = useContext(UserContext);
+  const {
+
+    user,
+
+    updateCurrentLesson,
+
+    completeCourse
+
+  } = useContext(UserContext);
 
   const course = courses.find(
     (course) => course.id === id
@@ -21,7 +29,14 @@ function Course() {
   const courseLessons = lessons[id] || [];
 
   const [currentLesson, setCurrentLesson] =
-    useState(0);
+
+    useState(user.currentLesson[id] || 0);
+
+  useEffect(() => {
+
+    updateCurrentLesson(id, currentLesson);
+
+  }, [currentLesson]);
 
   if (!course) {
 
@@ -50,7 +65,7 @@ function Course() {
 
     completeCourse(id);
 
-    alert("🎉 ¡Curso completado! Ganaste 100 XP.");
+    alert("🎉 ¡Curso completado! +100 XP");
 
     navigate("/");
 
@@ -92,10 +107,12 @@ function Course() {
 
         <button
 
-          disabled={currentLesson === 0}
+          disabled={currentLesson===0}
 
-          onClick={() =>
-            setCurrentLesson(currentLesson - 1)
+          onClick={()=>
+
+            setCurrentLesson(currentLesson-1)
+
           }
 
           className="bg-slate-700 px-6 py-3 rounded-lg disabled:opacity-40"
@@ -110,8 +127,10 @@ function Course() {
 
           <button
 
-            onClick={() =>
-              setCurrentLesson(currentLesson + 1)
+            onClick={()=>
+
+              setCurrentLesson(currentLesson+1)
+
             }
 
             className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
