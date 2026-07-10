@@ -3,18 +3,18 @@ import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import CourseCard from "../components/CourseCard";
 
-import courses from "../data/courses";
+import { getCourses } from "../services/api/coursesApi";
 
 function Cursos() {
 
   const [search, setSearch] = useState("");
 
+  const courses = getCourses();
+
   const filteredCourses = courses.filter((course) =>
 
     course.title
-
       .toLowerCase()
-
       .includes(search.toLowerCase())
 
   );

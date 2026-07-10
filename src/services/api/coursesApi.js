@@ -1,11 +1,25 @@
+import courses from "../../data/courses";
+
 function getCourses() {
 
-    console.log("Próximamente Firebase");
+  return courses;
+
+}
+
+function getCourseById(id) {
+
+  return courses.find(
+
+    (course) => course.id === id
+
+  );
 
 }
 
 export {
 
-    getCourses
+  getCourses,
+
+  getCourseById
 
 };

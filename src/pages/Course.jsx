@@ -2,7 +2,16 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import lessons from "../data/lessons";
-import courses from "../data/courses";
+
+import { getCourseById } from "../services/api/coursesApi";
+
+import {
+
+  calculateProgress,
+
+  isLastLesson
+
+} from "../services/logic/courseService";
 
 import { UserContext } from "../context/UserContext";
 
@@ -22,15 +31,13 @@ function Course() {
 
   } = useContext(UserContext);
 
-  const course = courses.find(
-    (course) => course.id === id
-  );
+  const course = getCourseById(id);
 
   const courseLessons = lessons[id] || [];
 
   const [currentLesson, setCurrentLesson] =
 
-    useState(user.currentLesson[id] || 0);
+    useState(user.currentLesson?.[id] ?? 0);
 
   useEffect(() => {
 
@@ -58,8 +65,21 @@ function Course() {
 
   const lesson = courseLessons[currentLesson];
 
-  const ultimaLeccion =
-    currentLesson === courseLessons.length - 1;
+  const progress = calculateProgress(
+
+    courseLessons.length,
+
+    currentLesson
+
+  );
+
+  const ultimaLeccion = isLastLesson(
+
+    courseLessons.length,
+
+    currentLesson
+
+  );
 
   function finalizarCurso() {
 
@@ -87,6 +107,24 @@ function Course() {
 
       </p>
 
+      <div className="w-full bg-slate-700 rounded-full h-3 mt-6">
+
+        <div
+
+          className="bg-green-500 h-3 rounded-full transition-all duration-300"
+
+          style={{ width: `${progress}%` }}
+
+        ></div>
+
+      </div>
+
+      <p className="text-right text-sm text-slate-400 mt-2">
+
+        {progress}% completado
+
+      </p>
+
       <div className="bg-slate-800 rounded-xl p-8 mt-8">
 
         <h2 className="text-2xl font-bold">
@@ -107,11 +145,11 @@ function Course() {
 
         <button
 
-          disabled={currentLesson===0}
+          disabled={currentLesson === 0}
 
-          onClick={()=>
+          onClick={() =>
 
-            setCurrentLesson(currentLesson-1)
+            setCurrentLesson(currentLesson - 1)
 
           }
 
@@ -127,9 +165,9 @@ function Course() {
 
           <button
 
-            onClick={()=>
+            onClick={() =>
 
-              setCurrentLesson(currentLesson+1)
+              setCurrentLesson(currentLesson + 1)
 
             }
 
