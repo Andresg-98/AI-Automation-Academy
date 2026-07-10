@@ -1,16 +1,21 @@
-import { useContext } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { UserContext } from "../context/UserContext";
+import lessons from "../data/lessons";
 import courses from "../data/courses";
 
 function Course() {
 
   const { id } = useParams();
 
-  const { user, completeLesson } = useContext(UserContext);
+  const course = courses.find(
+    (course) => course.id === id
+  );
 
-  const course = courses.find((c) => c.id === id);
+  const courseLessons = lessons[id] || [];
+
+  const [currentLesson, setCurrentLesson] =
+    useState(0);
 
   if (!course) {
 
@@ -18,7 +23,7 @@ function Course() {
 
       <div className="flex-1 p-10">
 
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-3xl font-bold">
 
           Curso no encontrado
 
@@ -30,8 +35,7 @@ function Course() {
 
   }
 
-  const completed =
-    user.completedCourses.includes(course.id);
+  const lesson = courseLessons[currentLesson];
 
   return (
 
@@ -45,7 +49,7 @@ function Course() {
 
       <p className="text-slate-400 mt-2">
 
-        {course.lesson}
+        Lección {currentLesson + 1} de {courseLessons.length}
 
       </p>
 
@@ -53,67 +57,56 @@ function Course() {
 
         <h2 className="text-2xl font-bold">
 
-          📖 Contenido
+          {lesson.title}
 
         </h2>
 
-        <p className="mt-5 text-slate-300 leading-8">
+        <p className="mt-6 text-slate-300 leading-8">
 
-          {course.description}
+          {lesson.content}
 
         </p>
 
-        <div className="mt-6">
-
-          <p>
-
-            ⭐ Dificultad:
-
-            <strong> {course.difficulty}</strong>
-
-          </p>
-
-          <p className="mt-2">
-
-            🏆 Recompensa:
-
-            <strong> +{course.xp} XP</strong>
-
-          </p>
-
-        </div>
-
       </div>
 
-      {completed ? (
+      <div className="flex gap-4 mt-8">
 
         <button
 
-          disabled
+          disabled={currentLesson === 0}
 
-          className="bg-gray-600 px-6 py-3 rounded-lg mt-8 cursor-not-allowed"
+          onClick={() =>
+            setCurrentLesson(currentLesson - 1)
+          }
+
+          className="bg-slate-700 px-6 py-3 rounded-lg disabled:opacity-40"
 
         >
 
-          ✅ Lección completada
+          ← Anterior
 
         </button>
-
-      ) : (
 
         <button
 
-          onClick={() => completeLesson(course.id, course.xp)}
+          disabled={
+            currentLesson ===
+            courseLessons.length - 1
+          }
 
-          className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg mt-8"
+          onClick={() =>
+            setCurrentLesson(currentLesson + 1)
+          }
+
+          className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg disabled:opacity-40"
 
         >
 
-          Completar lección
+          Siguiente →
 
         </button>
 
-      )}
+      </div>
 
     </div>
 
