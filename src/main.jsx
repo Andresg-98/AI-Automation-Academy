@@ -1,23 +1,43 @@
 import React from "react";
+
 import ReactDOM from "react-dom/client";
+
 import { BrowserRouter } from "react-router-dom";
 
-import "./index.css";
 import App from "./App";
-import UserProvider from "./context/UserContext";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+import "./index.css";
 
-    <BrowserRouter>
+import UserProvider
 
-      <UserProvider>
+from "./context/UserContext";
 
-        <App />
+import NotificationProvider
 
-      </UserProvider>
+from "./context/NotificationContext";
 
-    </BrowserRouter>
+ReactDOM.createRoot(
 
-  </React.StrictMode>
+document.getElementById("root")
+
+).render(
+
+<React.StrictMode>
+
+<BrowserRouter>
+
+<UserProvider>
+
+<NotificationProvider>
+
+<App/>
+
+</NotificationProvider>
+
+</UserProvider>
+
+</BrowserRouter>
+
+</React.StrictMode>
+
 );

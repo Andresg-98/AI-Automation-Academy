@@ -6,14 +6,12 @@ import lessons from "../data/lessons";
 import { getCourseById } from "../services/api/coursesApi";
 
 import {
-
   calculateProgress,
-
   isLastLesson
-
 } from "../services/logic/courseService";
 
 import { UserContext } from "../context/UserContext";
+import { NotificationContext } from "../context/NotificationContext";
 
 function Course() {
 
@@ -22,22 +20,22 @@ function Course() {
   const navigate = useNavigate();
 
   const {
-
     user,
-
     updateCurrentLesson,
-
     completeCourse
-
   } = useContext(UserContext);
+
+  const { showNotification } = useContext(NotificationContext);
 
   const course = getCourseById(id);
 
   const courseLessons = lessons[id] || [];
 
-  const [currentLesson, setCurrentLesson] =
+  const [currentLesson, setCurrentLesson] = useState(
 
-    useState(user.currentLesson?.[id] ?? 0);
+    user.currentLesson?.[id] ?? 0
+
+  );
 
   useEffect(() => {
 
@@ -85,7 +83,13 @@ function Course() {
 
     completeCourse(id);
 
-    alert("🎉 ¡Curso completado! +100 XP");
+    showNotification(
+
+      "🎉 Curso completado",
+
+      `Has completado "${course.title}" y ganaste +100 XP.`
+
+    );
 
     navigate("/");
 
@@ -161,39 +165,43 @@ function Course() {
 
         </button>
 
-        {!ultimaLeccion ? (
+        {
 
-          <button
+          !ultimaLeccion ? (
 
-            onClick={() =>
+            <button
 
-              setCurrentLesson(currentLesson + 1)
+              onClick={() =>
 
-            }
+                setCurrentLesson(currentLesson + 1)
 
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
+              }
 
-          >
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
 
-            Siguiente →
+            >
 
-          </button>
+              Siguiente →
 
-        ) : (
+            </button>
 
-          <button
+          ) : (
 
-            onClick={finalizarCurso}
+            <button
 
-            className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg"
+              onClick={finalizarCurso}
 
-          >
+              className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg"
 
-            🎉 Finalizar Curso
+            >
 
-          </button>
+              🎉 Finalizar Curso
 
-        )}
+            </button>
+
+          )
+
+        }
 
       </div>
 

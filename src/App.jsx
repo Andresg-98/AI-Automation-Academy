@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
+import Notification from "./components/Notification";
 
 import Dashboard from "./pages/Dashboard";
 import Cursos from "./pages/Cursos";
@@ -17,71 +18,31 @@ function App() {
 
     <div className="flex min-h-screen bg-slate-900 text-white">
 
-      <Sidebar />
+      <Notification/>
+
+      <Sidebar/>
 
       <div className="flex-1 flex flex-col">
 
-        <Header />
+        <Header/>
 
         <main className="flex-1">
 
           <Routes>
 
-            <Route
+            <Route path="/" element={<Dashboard/>}/>
 
-              path="/"
+            <Route path="/cursos" element={<Cursos/>}/>
 
-              element={<Dashboard />}
+            <Route path="/course/:id" element={<Course/>}/>
 
-            />
+            <Route path="/laboratorio" element={<Laboratorio/>}/>
 
-            <Route
+            <Route path="/tutor" element={<Tutor/>}/>
 
-              path="/cursos"
+            <Route path="/logros" element={<Logros/>}/>
 
-              element={<Cursos />}
-
-            />
-
-            <Route
-
-              path="/course/:id"
-
-              element={<Course />}
-
-            />
-
-            <Route
-
-              path="/laboratorio"
-
-              element={<Laboratorio />}
-
-            />
-
-            <Route
-
-              path="/tutor"
-
-              element={<Tutor />}
-
-            />
-
-            <Route
-
-              path="/logros"
-
-              element={<Logros />}
-
-            />
-
-            <Route
-
-              path="/configuracion"
-
-              element={<Configuracion />}
-
-            />
+            <Route path="/configuracion" element={<Configuracion/>}/>
 
           </Routes>
 
