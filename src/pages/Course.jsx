@@ -1,12 +1,18 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import lessons from "../data/lessons";
 import courses from "../data/courses";
 
+import { UserContext } from "../context/UserContext";
+
 function Course() {
 
   const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const { completeCourse } = useContext(UserContext);
 
   const course = courses.find(
     (course) => course.id === id
@@ -36,6 +42,19 @@ function Course() {
   }
 
   const lesson = courseLessons[currentLesson];
+
+  const ultimaLeccion =
+    currentLesson === courseLessons.length - 1;
+
+  function finalizarCurso() {
+
+    completeCourse(id);
+
+    alert("🎉 ¡Curso completado! Ganaste 100 XP.");
+
+    navigate("/");
+
+  }
 
   return (
 
@@ -87,24 +106,37 @@ function Course() {
 
         </button>
 
-        <button
+        {!ultimaLeccion ? (
 
-          disabled={
-            currentLesson ===
-            courseLessons.length - 1
-          }
+          <button
 
-          onClick={() =>
-            setCurrentLesson(currentLesson + 1)
-          }
+            onClick={() =>
+              setCurrentLesson(currentLesson + 1)
+            }
 
-          className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg disabled:opacity-40"
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
 
-        >
+          >
 
-          Siguiente →
+            Siguiente →
 
-        </button>
+          </button>
+
+        ) : (
+
+          <button
+
+            onClick={finalizarCurso}
+
+            className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg"
+
+          >
+
+            🎉 Finalizar Curso
+
+          </button>
+
+        )}
 
       </div>
 

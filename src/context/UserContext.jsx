@@ -48,7 +48,7 @@ function UserProvider({ children }) {
 
   }, [user]);
 
-  function completeLesson(courseId, xpReward) {
+  function completeCourse(courseId) {
 
     setUser((prev) => {
 
@@ -58,21 +58,11 @@ function UserProvider({ children }) {
 
       }
 
-      const progresoActual = prev.progress[courseId];
-
-      const nuevoProgreso = Math.min(
-
-        progresoActual + 20,
-
-        100
-
-      );
-
       return {
 
         ...prev,
 
-        xp: prev.xp + xpReward,
+        xp: prev.xp + 100,
 
         completedCourses: [
 
@@ -86,7 +76,7 @@ function UserProvider({ children }) {
 
           ...prev.progress,
 
-          [courseId]: nuevoProgreso
+          [courseId]: 100
 
         }
 
@@ -104,7 +94,7 @@ function UserProvider({ children }) {
 
         user,
 
-        completeLesson
+        completeCourse
 
       }}
 
