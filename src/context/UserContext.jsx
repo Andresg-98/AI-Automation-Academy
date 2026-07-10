@@ -1,45 +1,72 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
+const initialUser = {
+
+  name: "Andrés",
+
+  xp: 300,
+
+  streak: 4,
+
+  completedCourses: [],
+
+  progress: {
+
+    react: 80,
+
+    javascript: 35,
+
+    n8n: 0,
+
+    python: 0
+
+  }
+
+};
+
 function UserProvider({ children }) {
 
-  const [user, setUser] = useState({
+  const [user, setUser] = useState(() => {
 
-    name: "Andrés",
+    const savedUser = localStorage.getItem("academy-user");
 
-    xp: 300,
-
-    streak: 4,
-
-    completedCourses: [],
-
-    progress: {
-
-      react: 80,
-
-      javascript: 35,
-
-      n8n: 0,
-
-      python: 0
-
-    }
+    return savedUser ? JSON.parse(savedUser) : initialUser;
 
   });
+
+  useEffect(() => {
+
+    localStorage.setItem(
+
+      "academy-user",
+
+      JSON.stringify(user)
+
+    );
+
+  }, [user]);
 
   function completeLesson(courseId, xpReward) {
 
     setUser((prev) => {
 
-      // Si ya completó el curso, no hacer nada
       if (prev.completedCourses.includes(courseId)) {
+
         return prev;
+
       }
 
       const progresoActual = prev.progress[courseId];
 
-      const nuevoProgreso = Math.min(progresoActual + 20, 100);
+      const nuevoProgreso = Math.min(
+
+        progresoActual + 20,
+
+        100
+
+      );
 
       return {
 
