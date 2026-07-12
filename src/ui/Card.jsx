@@ -24,6 +24,10 @@ function Card({
 
         p-8
 
+        transition-all
+
+        duration-300
+
         ${className}
 
       `}

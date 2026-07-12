@@ -1,3 +1,5 @@
+import { colors } from "../theme";
+
 function Button({
 
   children,
@@ -14,29 +16,7 @@ function Button({
 
 }) {
 
-  const variants = {
-
-    primary:
-
-      "bg-blue-600 hover:bg-blue-700 text-white",
-
-    success:
-
-      "bg-green-600 hover:bg-green-700 text-white",
-
-    danger:
-
-      "bg-red-600 hover:bg-red-700 text-white",
-
-    secondary:
-
-      "bg-slate-700 hover:bg-slate-600 text-white",
-
-    outline:
-
-      "border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white"
-
-  };
+  const style = colors[variant] || colors.primary;
 
   return (
 
@@ -66,7 +46,13 @@ function Button({
 
         disabled:cursor-not-allowed
 
-        ${variants[variant]}
+        ${style.background}
+
+        ${style.hover}
+
+        ${style.text}
+
+        ${style.border || ""}
 
         ${className}
 
