@@ -7,3 +7,5 @@ export { default as Badge } from "./Badge";
 export { default as ProgressBar } from "./ProgressBar";
 
 export { default as EmptyState } from "./EmptyState";
+
+export { default as PageHeader } from "./PageHeader";

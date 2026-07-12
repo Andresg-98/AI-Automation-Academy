@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
+import { Card, Button } from "../ui";
+
 function CertificateCard({ certificate }) {
 
   const navigate = useNavigate();
 
   return (
 
-    <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-lg hover:border-green-500 transition-all duration-300">
+    <Card className="hover:border-green-500 transition-all duration-300">
 
       <h2 className="text-2xl font-bold">
 
@@ -26,7 +28,11 @@ function CertificateCard({ certificate }) {
 
       </p>
 
-      <button
+      <Button
+
+        variant="success"
+
+        className="mt-6"
 
         onClick={() =>
 
@@ -34,15 +40,13 @@ function CertificateCard({ certificate }) {
 
         }
 
-        className="bg-green-600 hover:bg-green-700 mt-6 px-6 py-3 rounded-xl transition-all"
-
       >
 
         Ver certificado
 
-      </button>
+      </Button>
 
-    </div>
+    </Card>
 
   );
 
