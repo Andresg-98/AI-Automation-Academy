@@ -33,6 +33,12 @@ const lessons = {
 }
 
 export default App;`
+        },
+
+        {
+          type: "image",
+          src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+          alt: "Logo oficial de React"
         }
 
       ]

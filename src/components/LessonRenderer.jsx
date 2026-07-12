@@ -1,6 +1,7 @@
 import TextBlock from "./blocks/TextBlock";
 import TipBlock from "./blocks/TipBlock";
 import CodeBlock from "./blocks/CodeBlock";
+import ImageBlock from "./blocks/ImageBlock";
 
 function LessonRenderer({ lesson }) {
 
@@ -14,51 +15,67 @@ function LessonRenderer({ lesson }) {
 
       </h2>
 
-      {lesson.blocks.map((block, index) => {
+      {
 
-        switch (block.type) {
+        lesson.blocks.map((block, index) => {
 
-          case "text":
+          switch (block.type) {
 
-            return (
+            case "text":
 
-              <TextBlock
-                key={index}
-                content={block.content}
-              />
+              return (
 
-            );
+                <TextBlock
+                  key={index}
+                  content={block.content}
+                />
 
-          case "tip":
+              );
 
-            return (
+            case "tip":
 
-              <TipBlock
-                key={index}
-                content={block.content}
-              />
+              return (
 
-            );
+                <TipBlock
+                  key={index}
+                  content={block.content}
+                />
 
-          case "code":
+              );
 
-            return (
+            case "code":
 
-              <CodeBlock
-                key={index}
-                language={block.language}
-                content={block.content}
-              />
+              return (
 
-            );
+                <CodeBlock
+                  key={index}
+                  language={block.language}
+                  content={block.content}
+                />
 
-          default:
+              );
 
-            return null;
+            case "image":
 
-        }
+              return (
 
-      })}
+                <ImageBlock
+                  key={index}
+                  src={block.src}
+                  alt={block.alt}
+                />
+
+              );
+
+            default:
+
+              return null;
+
+          }
+
+        })
+
+      }
 
     </div>
 
