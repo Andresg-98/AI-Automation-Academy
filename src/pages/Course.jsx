@@ -5,6 +5,7 @@ import lessons from "../data/lessons";
 import quizzes from "../data/quizzes";
 
 import Quiz from "../components/Quiz";
+import LessonRenderer from "../components/LessonRenderer";
 
 import { getCourseById } from "../services/api/coursesApi";
 
@@ -41,27 +42,17 @@ function Course() {
   const [quizApproved, setQuizApproved] = useState(false);
 
   useEffect(() => {
-
     updateCurrentLesson(id, currentLesson);
-
   }, [currentLesson]);
 
   if (!course) {
-
     return (
-
       <div className="flex-1 p-10">
-
         <h1 className="text-3xl font-bold">
-
           Curso no encontrado
-
         </h1>
-
       </div>
-
     );
-
   }
 
   const lesson = courseLessons[currentLesson];
@@ -110,7 +101,7 @@ function Course() {
         <div
           className="bg-green-500 h-3 rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
-        ></div>
+        />
 
       </div>
 
@@ -120,21 +111,7 @@ function Course() {
 
       </p>
 
-      <div className="bg-slate-800 rounded-xl p-8 mt-8">
-
-        <h2 className="text-2xl font-bold">
-
-          {lesson.title}
-
-        </h2>
-
-        <p className="mt-6 text-slate-300 leading-8">
-
-          {lesson.content}
-
-        </p>
-
-      </div>
+      <LessonRenderer lesson={lesson} />
 
       {ultimaLeccion && quizzes[id] && (
 
@@ -149,9 +126,7 @@ function Course() {
 
         <button
           disabled={currentLesson === 0}
-          onClick={() =>
-            setCurrentLesson(currentLesson - 1)
-          }
+          onClick={() => setCurrentLesson(currentLesson - 1)}
           className="bg-slate-700 px-6 py-3 rounded-lg disabled:opacity-40"
         >
 
@@ -162,9 +137,7 @@ function Course() {
         {!ultimaLeccion ? (
 
           <button
-            onClick={() =>
-              setCurrentLesson(currentLesson + 1)
-            }
+            onClick={() => setCurrentLesson(currentLesson + 1)}
             className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
           >
 
@@ -180,7 +153,7 @@ function Course() {
             className={`px-6 py-3 rounded-lg transition-all ${
               quizApproved
                 ? "bg-green-600 hover:bg-green-700"
-                : "bg-slate-600 cursor-not-allowed opacity-50"
+                : "bg-slate-600 opacity-50 cursor-not-allowed"
             }`}
           >
 
