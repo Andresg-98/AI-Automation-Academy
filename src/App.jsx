@@ -1,16 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
-import Notification from "./components/Notification";
 
 import Dashboard from "./pages/Dashboard";
 import Cursos from "./pages/Cursos";
-import Course from "./pages/Course";
+import Recursos from "./pages/Recursos";
 import Laboratorio from "./pages/Laboratorio";
 import Tutor from "./pages/Tutor";
 import Logros from "./pages/Logros";
 import Configuracion from "./pages/Configuracion";
+import Course from "./pages/Course";
 
 function App() {
 
@@ -18,35 +17,53 @@ function App() {
 
     <div className="flex min-h-screen bg-slate-900 text-white">
 
-      <Notification/>
+      <Sidebar />
 
-      <Sidebar/>
+      <div className="flex-1">
 
-      <div className="flex-1 flex flex-col">
+        <Routes>
 
-        <Header/>
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
 
-        <main className="flex-1">
+          <Route
+            path="/cursos"
+            element={<Cursos />}
+          />
 
-          <Routes>
+          <Route
+            path="/recursos"
+            element={<Recursos />}
+          />
 
-            <Route path="/" element={<Dashboard/>}/>
+          <Route
+            path="/laboratorio"
+            element={<Laboratorio />}
+          />
 
-            <Route path="/cursos" element={<Cursos/>}/>
+          <Route
+            path="/tutor"
+            element={<Tutor />}
+          />
 
-            <Route path="/course/:id" element={<Course/>}/>
+          <Route
+            path="/logros"
+            element={<Logros />}
+          />
 
-            <Route path="/laboratorio" element={<Laboratorio/>}/>
+          <Route
+            path="/configuracion"
+            element={<Configuracion />}
+          />
 
-            <Route path="/tutor" element={<Tutor/>}/>
+          <Route
+            path="/course/:id"
+            element={<Course />}
+          />
 
-            <Route path="/logros" element={<Logros/>}/>
-
-            <Route path="/configuracion" element={<Configuracion/>}/>
-
-          </Routes>
-
-        </main>
+        </Routes>
 
       </div>
 
