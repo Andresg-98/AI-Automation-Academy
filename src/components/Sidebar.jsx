@@ -12,18 +12,8 @@ function Sidebar() {
     },
 
     {
-      name: "👤 Perfil",
-      path: "/perfil"
-    },
-
-    {
       name: "📚 Cursos",
       path: "/cursos"
-    },
-
-    {
-      name: "📂 Recursos",
-      path: "/recursos"
     },
 
     {
@@ -39,6 +29,11 @@ function Sidebar() {
     {
       name: "🏆 Logros",
       path: "/logros"
+    },
+
+    {
+      name: "📜 Certificados",
+      path: "/certificados"
     },
 
     {
@@ -73,6 +68,7 @@ function Sidebar() {
               className={`rounded-lg px-4 py-3 transition-all
 
               ${
+
                 location.pathname === item.path
 
                   ? "bg-blue-600"

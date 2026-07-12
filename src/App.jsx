@@ -3,14 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 
 import Dashboard from "./pages/Dashboard";
-import Perfil from "./pages/Perfil";
 import Cursos from "./pages/Cursos";
-import Recursos from "./pages/Recursos";
+import Course from "./pages/Course";
 import Laboratorio from "./pages/Laboratorio";
 import Tutor from "./pages/Tutor";
 import Logros from "./pages/Logros";
+import Certificados from "./pages/Certificados";
 import Configuracion from "./pages/Configuracion";
-import Course from "./pages/Course";
 
 function App() {
 
@@ -24,23 +23,45 @@ function App() {
 
         <Routes>
 
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
 
-          <Route path="/perfil" element={<Perfil />} />
+          <Route
+            path="/cursos"
+            element={<Cursos />}
+          />
 
-          <Route path="/cursos" element={<Cursos />} />
+          <Route
+            path="/course/:id"
+            element={<Course />}
+          />
 
-          <Route path="/recursos" element={<Recursos />} />
+          <Route
+            path="/laboratorio"
+            element={<Laboratorio />}
+          />
 
-          <Route path="/laboratorio" element={<Laboratorio />} />
+          <Route
+            path="/tutor"
+            element={<Tutor />}
+          />
 
-          <Route path="/tutor" element={<Tutor />} />
+          <Route
+            path="/logros"
+            element={<Logros />}
+          />
 
-          <Route path="/logros" element={<Logros />} />
+          <Route
+            path="/certificados"
+            element={<Certificados />}
+          />
 
-          <Route path="/configuracion" element={<Configuracion />} />
-
-          <Route path="/course/:id" element={<Course />} />
+          <Route
+            path="/configuracion"
+            element={<Configuracion />}
+          />
 
         </Routes>
 
