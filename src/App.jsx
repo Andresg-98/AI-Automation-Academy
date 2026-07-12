@@ -9,6 +9,7 @@ import Laboratorio from "./pages/Laboratorio";
 import Tutor from "./pages/Tutor";
 import Logros from "./pages/Logros";
 import Certificados from "./pages/Certificados";
+import CertificateView from "./pages/CertificateView";
 import Configuracion from "./pages/Configuracion";
 
 function App() {
@@ -56,6 +57,11 @@ function App() {
           <Route
             path="/certificados"
             element={<Certificados />}
+          />
+
+          <Route
+            path="/certificado/:id"
+            element={<CertificateView />}
           />
 
           <Route
