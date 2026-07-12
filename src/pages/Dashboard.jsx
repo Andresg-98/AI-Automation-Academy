@@ -2,10 +2,12 @@ import { useContext } from "react";
 
 import { UserContext } from "../context/UserContext";
 
-import ProfileCard from "../components/ProfileCard";
+import DashboardHeader from "../components/dashboard/DashboardHeader";
+import HeroCard from "../components/dashboard/HeroCard";
+
 import ContinueLearning from "../components/ContinueLearning";
-import CourseCard from "../components/CourseCard";
 import ProgressCard from "../components/ProgressCard";
+import CourseCard from "../components/CourseCard";
 
 import courses from "../data/courses";
 
@@ -17,23 +19,9 @@ function Dashboard() {
 
     <div className="p-10">
 
-      <h1 className="text-4xl font-bold">
+      <DashboardHeader name={user.name} />
 
-        Bienvenido {user.name} 👋
-
-      </h1>
-
-      <p className="text-slate-400 mt-2">
-
-        Sigue aprendiendo IA y Automatización.
-
-      </p>
-
-      <div className="mt-10">
-
-        <ProfileCard />
-
-      </div>
+      <HeroCard />
 
       <div className="mt-10">
 
@@ -47,7 +35,7 @@ function Dashboard() {
 
       </div>
 
-      <h2 className="text-2xl font-bold mt-10 mb-6">
+      <h2 className="text-3xl font-bold mt-12 mb-6">
 
         Todos los cursos
 
@@ -55,21 +43,20 @@ function Dashboard() {
 
       <div className="grid md:grid-cols-3 gap-6">
 
-        {courses.map((course) => (
+        {
 
-          <CourseCard
+          courses.map((course) => (
 
-            key={course.id}
+            <CourseCard
+              key={course.id}
+              id={course.id}
+              title={course.title}
+              progress={`${user.progress[course.id]}%`}
+            />
 
-            id={course.id}
+          ))
 
-            title={course.title}
-
-            progress={`${user.progress[course.id]}%`}
-
-          />
-
-        ))}
+        }
 
       </div>
 
