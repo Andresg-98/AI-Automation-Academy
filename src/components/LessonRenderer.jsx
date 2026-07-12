@@ -1,3 +1,6 @@
+import TextBlock from "./blocks/TextBlock";
+import TipBlock from "./blocks/TipBlock";
+
 function LessonRenderer({ lesson }) {
 
   return (
@@ -10,57 +13,39 @@ function LessonRenderer({ lesson }) {
 
       </h2>
 
-      {
+      {lesson.blocks.map((block, index) => {
 
-        lesson.blocks.map((block, index) => {
+        switch (block.type) {
 
-          switch (block.type) {
+          case "text":
 
-            case "text":
+            return (
 
-              return (
+              <TextBlock
+                key={index}
+                content={block.content}
+              />
 
-                <p
+            );
 
-                  key={index}
+          case "tip":
 
-                  className="text-slate-300 leading-8 mb-6"
+            return (
 
-                >
+              <TipBlock
+                key={index}
+                content={block.content}
+              />
 
-                  {block.content}
+            );
 
-                </p>
+          default:
 
-              );
+            return null;
 
-            case "tip":
+        }
 
-              return (
-
-                <div
-
-                  key={index}
-
-                  className="bg-blue-900 border border-blue-600 rounded-lg p-4 mb-6"
-
-                >
-
-                  💡 {block.content}
-
-                </div>
-
-              );
-
-            default:
-
-              return null;
-
-          }
-
-        })
-
-      }
+      })}
 
     </div>
 
