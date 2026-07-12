@@ -12,6 +12,11 @@ function Sidebar() {
     },
 
     {
+      name: "👤 Perfil",
+      path: "/perfil"
+    },
+
+    {
       name: "📚 Cursos",
       path: "/cursos"
     },

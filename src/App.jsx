@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 
 import Dashboard from "./pages/Dashboard";
+import Perfil from "./pages/Perfil";
 import Cursos from "./pages/Cursos";
 import Recursos from "./pages/Recursos";
 import Laboratorio from "./pages/Laboratorio";
@@ -23,45 +24,23 @@ function App() {
 
         <Routes>
 
-          <Route
-            path="/"
-            element={<Dashboard />}
-          />
+          <Route path="/" element={<Dashboard />} />
 
-          <Route
-            path="/cursos"
-            element={<Cursos />}
-          />
+          <Route path="/perfil" element={<Perfil />} />
 
-          <Route
-            path="/recursos"
-            element={<Recursos />}
-          />
+          <Route path="/cursos" element={<Cursos />} />
 
-          <Route
-            path="/laboratorio"
-            element={<Laboratorio />}
-          />
+          <Route path="/recursos" element={<Recursos />} />
 
-          <Route
-            path="/tutor"
-            element={<Tutor />}
-          />
+          <Route path="/laboratorio" element={<Laboratorio />} />
 
-          <Route
-            path="/logros"
-            element={<Logros />}
-          />
+          <Route path="/tutor" element={<Tutor />} />
 
-          <Route
-            path="/configuracion"
-            element={<Configuracion />}
-          />
+          <Route path="/logros" element={<Logros />} />
 
-          <Route
-            path="/course/:id"
-            element={<Course />}
-          />
+          <Route path="/configuracion" element={<Configuracion />} />
+
+          <Route path="/course/:id" element={<Course />} />
 
         </Routes>
 
