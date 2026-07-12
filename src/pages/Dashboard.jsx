@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 import ProfileCard from "../components/ProfileCard";
+import ContinueLearning from "../components/ContinueLearning";
 import CourseCard from "../components/CourseCard";
 import ProgressCard from "../components/ProgressCard";
 
@@ -36,13 +37,19 @@ function Dashboard() {
 
       <div className="mt-10">
 
+        <ContinueLearning />
+
+      </div>
+
+      <div className="mt-10">
+
         <ProgressCard xp={user.xp} />
 
       </div>
 
       <h2 className="text-2xl font-bold mt-10 mb-6">
 
-        Continúa aprendiendo
+        Todos los cursos
 
       </h2>
 

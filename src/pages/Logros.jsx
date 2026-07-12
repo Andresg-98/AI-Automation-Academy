@@ -3,12 +3,16 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 import logros from "../data/logros";
+import badges from "../data/badges";
 
 import AchievementCard from "../components/AchievementCard";
+import BadgeCard from "../components/BadgeCard";
 
 function Logros() {
 
   const { user } = useContext(UserContext);
+
+  const completed = user.completedCourses.length;
 
   return (
 
@@ -16,45 +20,77 @@ function Logros() {
 
       <h1 className="text-4xl font-bold">
 
-        🏆 Logros
+        🏆 Logros e Insignias
 
       </h1>
 
       <p className="text-slate-400 mt-2">
 
-        Desbloquea recompensas completando cursos.
+        Tu progreso dentro de AI Academy.
 
       </p>
 
-      <div className="grid md:grid-cols-2 gap-6 mt-10">
+      <h2 className="text-2xl font-bold mt-10 mb-5">
+
+        Logros
+
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-6">
 
         {
 
-          logros.map((logro) => {
+          logros.map((logro) => (
 
-            const unlocked =
+            <AchievementCard
 
-              user.completedCourses.length >=
+              key={logro.id}
 
-              logro.requirement;
+              title={logro.title}
 
-            return (
+              description={logro.description}
 
-              <AchievementCard
+              unlocked={
 
-                key={logro.id}
+                completed >= logro.requirement
 
-                title={logro.title}
+              }
 
-                description={logro.description}
+            />
 
-                unlocked={unlocked}
+          ))
 
-              />
+        }
 
-            );
+      </div>
 
-          })
+      <h2 className="text-2xl font-bold mt-12 mb-5">
+
+        Insignias
+
+      </h2>
+
+      <div className="grid md:grid-cols-3 gap-6">
+
+        {
+
+          badges.map((badge) => (
+
+            <BadgeCard
+
+              key={badge.id}
+
+              badge={badge}
+
+              unlocked={
+
+                completed >= badge.requirement
+
+              }
+
+            />
+
+          ))
 
         }
 
