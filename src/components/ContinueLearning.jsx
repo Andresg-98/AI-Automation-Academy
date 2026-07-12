@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { UserContext } from "../context/UserContext";
-
 import courses from "../data/courses";
 
 function ContinueLearning() {
@@ -23,41 +22,104 @@ function ContinueLearning() {
 
   if (!courseInProgress) {
 
-    return null;
+    return (
+
+      <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
+
+        <h2 className="text-2xl font-bold">
+
+          🚀 Comienza tu aprendizaje
+
+        </h2>
+
+        <p className="text-slate-400 mt-3">
+
+          Aún no has iniciado ningún curso. Explora el catálogo y comienza tu
+          primera lección.
+
+        </p>
+
+        <button
+
+          onClick={() => navigate("/cursos")}
+
+          className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl transition-all"
+
+        >
+
+          Ver cursos
+
+        </button>
+
+      </div>
+
+    );
 
   }
 
+  const progreso = user.progress[courseInProgress.id] || 0;
+
   return (
 
-    <div className="bg-slate-800 rounded-xl p-6 mb-10">
+    <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-lg">
 
-      <h2 className="text-2xl font-bold">
+      <div className="flex justify-between items-center flex-wrap gap-6">
 
-        ▶ Continúa aprendiendo
+        <div>
 
-      </h2>
+          <p className="text-blue-400 font-semibold">
 
-      <p className="text-slate-400 mt-2">
+            ▶ Continúa aprendiendo
 
-        {courseInProgress.title}
+          </p>
 
-      </p>
+          <h2 className="text-3xl font-bold mt-2">
 
-      <button
+            {courseInProgress.title}
 
-        onClick={() =>
+          </h2>
 
-          navigate(`/course/${courseInProgress.id}`)
+          <p className="text-slate-400 mt-3">
 
-        }
+            Has completado el {progreso}% del curso.
 
-        className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg mt-5"
+          </p>
 
-      >
+        </div>
 
-        Continuar curso
+        <button
 
-      </button>
+          onClick={() => navigate(`/course/${courseInProgress.id}`)}
+
+          className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl transition-all"
+
+        >
+
+          Continuar Curso
+
+        </button>
+
+      </div>
+
+      <div className="mt-8">
+
+        <div className="w-full bg-slate-700 rounded-full h-4">
+
+          <div
+
+            className="bg-blue-500 h-4 rounded-full transition-all duration-500"
+
+            style={{
+
+              width: `${progreso}%`
+
+            }}
+
+          />
+
+        </div>
+
+      </div>
 
     </div>
 
