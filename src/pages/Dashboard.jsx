@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import HeroCard from "../components/dashboard/HeroCard";
+import StatsGrid from "../components/dashboard/StatsGrid";
 
 import ContinueLearning from "../components/ContinueLearning";
 import ProgressCard from "../components/ProgressCard";
@@ -22,6 +23,8 @@ function Dashboard() {
       <DashboardHeader name={user.name} />
 
       <HeroCard />
+
+      <StatsGrid />
 
       <div className="mt-10">
 
@@ -48,10 +51,15 @@ function Dashboard() {
           courses.map((course) => (
 
             <CourseCard
+
               key={course.id}
+
               id={course.id}
+
               title={course.title}
+
               progress={`${user.progress[course.id]}%`}
+
             />
 
           ))
