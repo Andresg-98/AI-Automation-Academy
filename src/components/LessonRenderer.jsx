@@ -1,5 +1,6 @@
 import TextBlock from "./blocks/TextBlock";
 import TipBlock from "./blocks/TipBlock";
+import CodeBlock from "./blocks/CodeBlock";
 
 function LessonRenderer({ lesson }) {
 
@@ -34,6 +35,18 @@ function LessonRenderer({ lesson }) {
 
               <TipBlock
                 key={index}
+                content={block.content}
+              />
+
+            );
+
+          case "code":
+
+            return (
+
+              <CodeBlock
+                key={index}
+                language={block.language}
                 content={block.content}
               />
 
