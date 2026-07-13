@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Sidebar from "./components/Sidebar";
+import { AppLayout } from "./layouts";
 
 import Dashboard from "./pages/Dashboard";
 import Cursos from "./pages/Cursos";
@@ -16,64 +16,58 @@ function App() {
 
   return (
 
-    <div className="flex min-h-screen bg-slate-900 text-white">
+    <AppLayout>
 
-      <Sidebar />
+      <Routes>
 
-      <div className="flex-1">
+        <Route
+          path="/"
+          element={<Dashboard />}
+        />
 
-        <Routes>
+        <Route
+          path="/cursos"
+          element={<Cursos />}
+        />
 
-          <Route
-            path="/"
-            element={<Dashboard />}
-          />
+        <Route
+          path="/course/:id"
+          element={<Course />}
+        />
 
-          <Route
-            path="/cursos"
-            element={<Cursos />}
-          />
+        <Route
+          path="/laboratorio"
+          element={<Laboratorio />}
+        />
 
-          <Route
-            path="/course/:id"
-            element={<Course />}
-          />
+        <Route
+          path="/tutor"
+          element={<Tutor />}
+        />
 
-          <Route
-            path="/laboratorio"
-            element={<Laboratorio />}
-          />
+        <Route
+          path="/logros"
+          element={<Logros />}
+        />
 
-          <Route
-            path="/tutor"
-            element={<Tutor />}
-          />
+        <Route
+          path="/certificados"
+          element={<Certificados />}
+        />
 
-          <Route
-            path="/logros"
-            element={<Logros />}
-          />
+        <Route
+          path="/certificado/:id"
+          element={<CertificateView />}
+        />
 
-          <Route
-            path="/certificados"
-            element={<Certificados />}
-          />
+        <Route
+          path="/configuracion"
+          element={<Configuracion />}
+        />
 
-          <Route
-            path="/certificado/:id"
-            element={<CertificateView />}
-          />
+      </Routes>
 
-          <Route
-            path="/configuracion"
-            element={<Configuracion />}
-          />
-
-        </Routes>
-
-      </div>
-
-    </div>
+    </AppLayout>
 
   );
 
