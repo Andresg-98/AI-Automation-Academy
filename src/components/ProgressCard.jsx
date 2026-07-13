@@ -5,6 +5,16 @@ import { UserContext } from "../context/UserContext";
 import courses from "../data/courses";
 import logros from "../data/logros";
 
+import {
+
+  Card,
+
+  ProgressBar,
+
+  Badge
+
+} from "../ui";
+
 function ProgressCard() {
 
   const { user } = useContext(UserContext);
@@ -29,37 +39,39 @@ function ProgressCard() {
 
   return (
 
-    <div className="bg-slate-800 rounded-2xl p-8 shadow-lg border border-slate-700">
+    <Card>
 
-      <h2 className="text-3xl font-bold">
+      <div className="flex justify-between items-center">
 
-        📈 Tu progreso
+        <h2 className="text-3xl font-bold">
 
-      </h2>
+          📈 Tu progreso
 
-      <p className="text-slate-400 mt-2">
+        </h2>
 
-        Nivel {nivel}
+        <Badge color="green">
 
-      </p>
+          Nivel {nivel}
 
-      <div className="w-full bg-slate-700 rounded-full h-5 mt-6 overflow-hidden">
-
-        <div
-
-          className="bg-green-500 h-5 rounded-full transition-all duration-700"
-
-          style={{
-
-            width: `${porcentaje}%`
-
-          }}
-
-        ></div>
+        </Badge>
 
       </div>
 
-      <div className="flex justify-between mt-3 text-sm text-slate-400">
+      <div className="mt-6">
+
+        <ProgressBar
+
+          value={porcentaje}
+
+          color="bg-green-500"
+
+          showLabel
+
+        />
+
+      </div>
+
+      <div className="flex justify-between mt-4 text-sm text-slate-400">
 
         <span>
 
@@ -77,19 +89,27 @@ function ProgressCard() {
 
       <p className="mt-6 text-slate-300">
 
-        Te faltan <span className="font-bold text-green-400">
+        Te faltan
+
+        <span className="font-bold text-green-400">
+
+          {" "}
 
           {xpRestante} XP
 
-        </span> para alcanzar el nivel <span className="font-bold">
+        </span>
 
-          {nivel + 1}
+        {" "}para alcanzar el
+
+        <span className="font-bold">
+
+          {" "}Nivel {nivel + 1}
 
         </span>
 
       </p>
 
-      <div className="border-t border-slate-700 mt-8 pt-6 grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-6 mt-8 pt-8 border-t border-slate-700">
 
         <div>
 
@@ -141,7 +161,7 @@ function ProgressCard() {
 
       </div>
 
-    </div>
+    </Card>
 
   );
 
