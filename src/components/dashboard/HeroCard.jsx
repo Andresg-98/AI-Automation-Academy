@@ -1,18 +1,34 @@
 import { useContext } from "react";
+
 import { UserContext } from "../../context/UserContext";
 
+import courses from "../../data/courses";
+import logros from "../../data/logros";
+
+import { ProgressBar } from "../../ui";
+
+import {
+
+  getDashboardInsights
+
+} from "../../services/dashboard/dashboardService";
+
 function HeroCard() {
+
   const { user } = useContext(UserContext);
 
-  const xpPorNivel = 300;
+  const insights = getDashboardInsights(
 
-  const nivel = Math.floor(user.xp / xpPorNivel) + 1;
+    user,
 
-  const xpActual = user.xp % xpPorNivel;
+    courses,
 
-  const porcentaje = (xpActual / xpPorNivel) * 100;
+    logros
+
+  );
 
   return (
+
     <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl p-8 shadow-xl">
 
       <div className="flex justify-between items-start flex-wrap gap-8">
@@ -27,14 +43,13 @@ function HeroCard() {
 
           <h2 className="text-4xl font-bold mt-2">
 
-            Nivel {nivel}
+            Nivel {insights.nivel}
 
           </h2>
 
           <p className="mt-3 text-blue-100">
 
-            Estás avanzando muy bien. Continúa aprendiendo para desbloquear
-            nuevos logros.
+            Solo necesitas {insights.xpRestante} XP para subir de nivel.
 
           </p>
 
@@ -60,7 +75,7 @@ function HeroCard() {
 
       <div className="mt-8">
 
-        <div className="flex justify-between mb-2">
+        <div className="flex justify-between mb-3">
 
           <span>
 
@@ -70,25 +85,28 @@ function HeroCard() {
 
           <span>
 
-            {xpActual}/{xpPorNivel} XP
+            {insights.xpActual}/300 XP
 
           </span>
 
         </div>
 
-        <div className="w-full bg-blue-400/30 rounded-full h-4">
+        <ProgressBar
 
-          <div
-            className="bg-white h-4 rounded-full transition-all duration-700"
-            style={{ width: `${porcentaje}%` }}
-          />
+          value={insights.porcentaje}
 
-        </div>
+          height="h-4"
+
+          color="bg-white"
+
+        />
 
       </div>
 
     </div>
+
   );
+
 }
 
 export default HeroCard;

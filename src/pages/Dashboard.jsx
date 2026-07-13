@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import HeroCard from "../components/dashboard/HeroCard";
 import StatsGrid from "../components/dashboard/StatsGrid";
+import DashboardInsights from "../components/dashboard/DashboardInsights";
 
 import ContinueLearning from "../components/ContinueLearning";
 import ProgressCard from "../components/ProgressCard";
@@ -12,19 +13,23 @@ import CourseCard from "../components/CourseCard";
 
 import courses from "../data/courses";
 
+import { PageContainer } from "../layouts";
+
 function Dashboard() {
 
   const { user } = useContext(UserContext);
 
   return (
 
-    <div className="p-10">
+    <PageContainer>
 
       <DashboardHeader name={user.name} />
 
       <HeroCard />
 
       <StatsGrid />
+
+      <DashboardInsights />
 
       <div className="mt-10">
 
@@ -34,7 +39,7 @@ function Dashboard() {
 
       <div className="mt-10">
 
-        <ProgressCard xp={user.xp} />
+        <ProgressCard />
 
       </div>
 
@@ -68,7 +73,7 @@ function Dashboard() {
 
       </div>
 
-    </div>
+    </PageContainer>
 
   );
 
