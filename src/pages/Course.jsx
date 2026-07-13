@@ -3,9 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import lessons from "../data/lessons";
 import quizzes from "../data/quizzes";
+import challenges from "../data/challenges";
 
 import Quiz from "../components/Quiz";
 import LessonRenderer from "../components/LessonRenderer";
+import CodingChallenge from "../components/CodingChallenge";
 
 import { getCourseById } from "../services/api/coursesApi";
 
@@ -35,6 +37,8 @@ function Course() {
 
   const courseLessons = lessons[id] || [];
 
+  const courseChallenges = challenges[id] || [];
+
   const [currentLesson, setCurrentLesson] = useState(
     user.currentLesson?.[id] ?? 0
   );
@@ -42,29 +46,51 @@ function Course() {
   const [quizApproved, setQuizApproved] = useState(false);
 
   useEffect(() => {
+
     updateCurrentLesson(id, currentLesson);
+
   }, [currentLesson]);
 
   if (!course) {
+
     return (
+
       <div className="flex-1 p-10">
+
         <h1 className="text-3xl font-bold">
+
           Curso no encontrado
+
         </h1>
+
       </div>
+
     );
+
   }
 
   const lesson = courseLessons[currentLesson];
 
+  const challenge = courseChallenges.find(
+
+    (item) => item.lesson === lesson.id
+
+  );
+
   const progress = calculateProgress(
+
     courseLessons.length,
+
     currentLesson
+
   );
 
   const ultimaLeccion = isLastLesson(
+
     courseLessons.length,
+
     currentLesson
+
   );
 
   function finalizarCurso() {
@@ -72,8 +98,11 @@ function Course() {
     completeCourse(id);
 
     showNotification(
+
       "🎉 Curso completado",
+
       `Has completado "${course.title}" y ganaste +100 XP.`
+
     );
 
     navigate("/");
@@ -99,8 +128,15 @@ function Course() {
       <div className="w-full bg-slate-700 rounded-full h-3 mt-6">
 
         <div
+
           className="bg-green-500 h-3 rounded-full transition-all duration-300"
-          style={{ width: `${progress}%` }}
+
+          style={{
+
+            width: `${progress}%`
+
+          }}
+
         />
 
       </div>
@@ -113,11 +149,16 @@ function Course() {
 
       <LessonRenderer lesson={lesson} />
 
+      <CodingChallenge challenge={challenge} />
+
       {ultimaLeccion && quizzes[id] && (
 
         <Quiz
+
           questions={quizzes[id]}
+
           onQuizCompleted={setQuizApproved}
+
         />
 
       )}
@@ -125,43 +166,70 @@ function Course() {
       <div className="flex gap-4 mt-8">
 
         <button
+
           disabled={currentLesson === 0}
-          onClick={() => setCurrentLesson(currentLesson - 1)}
+
+          onClick={() =>
+
+            setCurrentLesson(currentLesson - 1)
+
+          }
+
           className="bg-slate-700 px-6 py-3 rounded-lg disabled:opacity-40"
+
         >
 
           ← Anterior
 
         </button>
 
-        {!ultimaLeccion ? (
+        {
 
-          <button
-            onClick={() => setCurrentLesson(currentLesson + 1)}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
-          >
+          !ultimaLeccion ? (
 
-            Siguiente →
+            <button
 
-          </button>
+              onClick={() =>
 
-        ) : (
+                setCurrentLesson(currentLesson + 1)
 
-          <button
-            disabled={!quizApproved}
-            onClick={finalizarCurso}
-            className={`px-6 py-3 rounded-lg transition-all ${
-              quizApproved
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-slate-600 opacity-50 cursor-not-allowed"
-            }`}
-          >
+              }
 
-            🎉 Finalizar Curso
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg"
 
-          </button>
+            >
 
-        )}
+              Siguiente →
+
+            </button>
+
+          ) : (
+
+            <button
+
+              disabled={!quizApproved}
+
+              onClick={finalizarCurso}
+
+              className={`px-6 py-3 rounded-lg transition-all ${
+
+                quizApproved
+
+                  ? "bg-green-600 hover:bg-green-700"
+
+                  : "bg-slate-600 opacity-50 cursor-not-allowed"
+
+              }`}
+
+            >
+
+              🎉 Finalizar Curso
+
+            </button>
+
+          )
+
+        }
 
       </div>
 
