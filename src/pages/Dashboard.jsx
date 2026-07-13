@@ -6,6 +6,7 @@ import DashboardHeader from "../components/dashboard/DashboardHeader";
 import HeroCard from "../components/dashboard/HeroCard";
 import StatsGrid from "../components/dashboard/StatsGrid";
 import DashboardInsights from "../components/dashboard/DashboardInsights";
+import LearningPathCard from "../components/dashboard/LearningPathCard";
 
 import ContinueLearning from "../components/ContinueLearning";
 import ProgressCard from "../components/ProgressCard";
@@ -30,6 +31,8 @@ function Dashboard() {
       <StatsGrid />
 
       <DashboardInsights />
+
+      <LearningPathCard />
 
       <div className="mt-10">
 
